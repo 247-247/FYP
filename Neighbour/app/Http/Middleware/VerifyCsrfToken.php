@@ -35,7 +35,10 @@ class VerifyCsrfToken extends BaseVerifier
        '/newBrandInsertProfile',
        '/newBrandRegister',
        '/getBrandBasesOnId',
-       '/getBrandBasesOnEmail'
+       '/getBrandBasesOnEmail',
+        '/setBrandStausDeActive',
+        '/setBrandStausActive'
+
 
             
     ];

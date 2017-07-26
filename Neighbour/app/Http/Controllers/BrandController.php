@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Brand;
 use Illuminate\Http\JsonResponse;
@@ -9,9 +8,7 @@ use Illuminate\Http\Response;
 
 class BrandController extends Controller
 {
-     
-
-       public function inserNewBrandProfile(Request $request)
+      public function inserNewBrandProfile(Request $request)
         {
        	      $id = $request->input("id");
               $name = $request->input("name");
@@ -54,7 +51,7 @@ class BrandController extends Controller
 				        $Brand->email =$email;
 				         $Brand->password =$p;
 				        
-				        $Brand->status = 'deActive';
+				        $Brand->status = 'active';
 				         $Brand->currentStatus ="NO";
 				       
 				        $Brand->save();
@@ -98,7 +95,11 @@ public function getEmployeeBaseOnEmail(Request $request)
   
   //  $employ =  Employe::where('skill',$skill)->get();;
   if(!empty($brand)){
-  return response()->json(['BrandBaseOnEmail'=>['status'=>"yes",'id'=>$brand->id,'Account'=>$brand->isAccountSetUp]]);
+         if($brand->status == "active"){
+          return response()->json(['BrandBaseOnEmail'=>['status'=>"yes",'id'=>$brand->id,'Account'=>$brand->isAccountSetUp]]);
+        }else{
+          return response()->json(['BrandBaseOnEmail'=>['status'=>"no",'id'=>0,'Account'=>'no']]);
+        }
      }
      else{
      return response()->json(['BrandBaseOnEmail'=>['status'=>"no",'id'=>0,'Account'=>'no']]);
@@ -107,8 +108,53 @@ public function getEmployeeBaseOnEmail(Request $request)
   
 
 }
+public function getAllBrands(Request $request)
+{                                                 // return Employee base on id
+    
+
+  
+  $brands = Brand::All();  
+
+  return response()->json(['Brands' => $brands]);
+     
+
+}
 
 
+public function setBrandStatus(Request $request)
+{                                                 // change status from active to deactive
+    
+
+  $id = $request->input("id");
+  $b = Brand::find($id);
+ if(!empty($b)){
+    $b->status = 'deActive';
+     $b->save();
+  return response()->json(['result' =>'true']);
+}
+else
+{
+return response()->json(['result' =>'false']);
+
+ }
+}
+ public function setBrandActive(Request $request)
+{                                                 // change status from active to deactive
+    
+
+  $id = $request->input("id");
+  $b = Brand::find($id);
+ if(!empty($b)){
+    $b->status = 'active';
+     $b->save();
+  return response()->json(['result' =>'true']);
+}
+else
+{
+return response()->json(['result' =>'false']);
+
+ }
+}
 
 
 

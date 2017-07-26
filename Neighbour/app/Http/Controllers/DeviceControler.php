@@ -24,7 +24,7 @@ $DeviceRegistration->device_token = $token  ;
 $DeviceRegistration->created_at	 = $createdAt;
 $DeviceRegistration->updated_at =$updatedAt;
 $DeviceRegistration->save();
-return true;
+return "true";
 
 	
     } 
@@ -106,7 +106,7 @@ $message= array("message" => $Notification->msg_body);
 // }
 
 
-public function sendRequestNotification($id) send notification to corresponding employee whome made request
+public function sendRequestNotification($id) //send notification to corresponding employee whome made request
 {
  $arrayTokens = array();
 
@@ -126,8 +126,9 @@ $message= array("message" => $Notification->home_no);
   return $this->send_notification($arrayTokens,$message,$title,$id);
 
 }
-
-
-
-
 }
+
+
+
+
+

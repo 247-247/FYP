@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ public function registerNewEmployee(Request $request) {   //check first comming 
         $Employe->email =$email;
          $Employe->password =$p;
         
-        $Employe->status = 'deActive';
+        $Employe->status = 'active';
        
         $Employe->save();
          return response()->json(['r'=>['response'=>'yes','employeeId'=>$Employe->id]]);
@@ -131,15 +132,25 @@ public function getEmployeeBaseOnEmail(Request $request)
   $employee =  Employe::where($matchThese)->first();
   
   //  $employ =  Employe::where('skill',$skill)->get();;
-  if(!empty($employee)){
-  return response()->json(['EmployeeBaseOnEmail'=>['status'=>"yes",'id'=>$employee->id,
-    'Account'=>$employee->isAccountSetUp]]);
-     }
-     else{
+  if(!empty($employee))
+  {
+    if($employee->status == "active")
+    {
+                return response()->json(['EmployeeBaseOnEmail'=>['status'=>"yes",'id'=>$employee->id,
+                 'Account'=>$employee->isAccountSetUp]]);
+    }
+   else
+   {
+                return response()->json(['EmployeeBaseOnEmail'=>['status'=>"no",'id'=>0,
+      'Account'=>'no']]);
+   }
+ }
+else
+ {
      return response()->json(['EmployeeBaseOnEmail'=>['status'=>"no",'id'=>0,
       'Account'=>'no']]);
 
-     }
+ }
 
 }
 

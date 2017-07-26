@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Demo');
 });
 Route::match(array('GET','POST'),'/DeviceRegistration','DeviceControler@insertDevice');
 Route::match(array('GET','POST'),'/DeviceAllTokens','DeviceControler@sendToAllNotification');
@@ -52,3 +52,6 @@ Route::match(array('GET','POST'),'/newBrandInsertProfile','BrandController@inser
 Route::match(array('GET','POST'),'/newBrandRegister','BrandController@registerNewBrand'); // insert New Brand profile
 Route::match(array('GET','POST'),'/getBrandBasesOnId','BrandController@getBrandBaseOnId');
 Route::match(array('GET','POST'),'/getBrandBasesOnEmail','BrandController@getEmployeeBaseOnEmail');
+Route::get('/getAllBrands','BrandController@getAllBrands');
+Route::match(array('GET','POST'),'/setBrandStausDeActive','BrandController@setBrandStatus');
+Route::match(array('GET','POST'),'/setBrandStausActive','BrandController@setBrandActive');

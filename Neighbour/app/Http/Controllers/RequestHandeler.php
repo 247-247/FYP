@@ -12,6 +12,14 @@ class RequestHandeler extends Controller
 {
     public function inserNewRequest(Request $request)
     {
+      $RequestSender_id = $request->input("sender_id");
+      $RequestType = $request->input("type");
+     
+     $matchThese = ['sender_id' => $RequestSender_id, 'type' => $RequestType,'status' =>"active"];
+
+   $results = ServiceRequest::where($matchThese)->first();
+  // $ray_state = array_filter($results);
+      if(empty($results)){
 
 	 $type = $request->input("type");
    $cause = $request->input("cause");
@@ -43,6 +51,10 @@ class RequestHandeler extends Controller
 
     app('App\Http\Controllers\ServiceRequestNotificationController')->newNotificationMessageItem($Requestt->id);
 	     return response()->json(['response' =>'true']);
+     }else{
+          return response()->json(['response' =>'false']);
+
+     }
 
     }
 public function acceptRequest(Request $request){
@@ -201,6 +213,7 @@ public function getAllRequest(Request $request)
    
    $results = ServiceRequest::all();
    return response()->json(['request' =>$results]);
+
 
 }
 

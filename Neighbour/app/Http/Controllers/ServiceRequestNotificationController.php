@@ -24,6 +24,7 @@ class ServiceRequestNotificationController extends Controller
 //$status = $request->input("status"); 
        
       // echo $Requestt->sender_id;
+     if(is_object($Employe) && (count(get_object_vars($Employe)) > 0)) {
       $Notification = new  NoficationForRequest;
       $Notification->sender_id = $Requestt->sender_id;
       $Notification->sende_to_id =$Requestt->powerMan_id; 
@@ -51,6 +52,7 @@ class ServiceRequestNotificationController extends Controller
      // app('App\Http\Controllers\DeviceControler')->sendRequestNotification($Notification->id);
       return 'true';
     }
+  }
 
 
 

@@ -22,11 +22,11 @@ class ServiceTypeControllers extends Controller
          $ServiceType->Skill = $skill;
          $ServiceType->image_url=$img ;
          $ServiceType->save();
-         return response()->json(['response' =>'true']);
+         return response()->json(['r'=>['response' =>'yes']]);
 }
 else
 {
-         return response()->json(['response' =>'false']);
+         return response()->json(['r'=>['response' =>'no']]);
 }
 
 }
